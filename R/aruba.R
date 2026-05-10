@@ -34,7 +34,7 @@ aruba <- function(x = "Aruba",
   if (!isTRUE(quiet) && interactive() &&
       length(x) == 1L && identical(tolower(x), "aruba")) {
     message(
-      "A.R.U.B.A. — Annotated Reference for Under-coded Border Areas.\n",
+      "A.R.U.B.A.: Annotated Reference for Under-coded Border Areas.\n",
       "Named in homage to Edward Cheung's A.R.U.B.A. (ASCS/NCS Relay Unit\n",
       "Breaker Assembly), installed on the Hubble Space Telescope during\n",
       "the 2002 servicing mission. Set options(islandcodes.aruba.quiet = TRUE)\n",
