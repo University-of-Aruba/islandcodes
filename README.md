@@ -72,4 +72,4 @@ The `islands` reference dataset is the work of the [Digital Competence Dutch Car
 
 ## License
 
-CC BY 4.0. See [LICENSE.md](LICENSE.md).
+CC BY 4.0. See the LICENSE file.

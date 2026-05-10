@@ -5,7 +5,7 @@ Authors@R: c(
     person("Rendell", "de Kort",
            email = "rendell.dekort@ua.aw",
            role = c("aut", "cre"),
-           comment = c(ORCID = "0000-0001-9598-9698")),
+           comment = c(ORCID = "0009-0006-5402-0500")),
     person(family = "University of Aruba",
            role = c("cph", "fnd"),
            comment = "Digital Competence Dutch Caribbean (DCDC) Network")

@@ -59,7 +59,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Rendell de Kort \email{rendell.dekort@ua.aw} (\href{https://orcid.org/0000-0001-9598-9698}{ORCID})
+\strong{Maintainer}: Rendell de Kort \email{rendell.dekort@ua.aw} (\href{https://orcid.org/0009-0006-5402-0500}{ORCID})
 
 Other contributors:
 \itemize{

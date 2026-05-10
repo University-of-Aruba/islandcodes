@@ -12,4 +12,3 @@
 ^\.gitignore$
 ^revdep$
 ^codecov\.yml$
-^LICENSE\.md$
