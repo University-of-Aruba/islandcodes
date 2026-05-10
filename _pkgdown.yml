@@ -1,0 +1,24 @@
+url: https://university-of-aruba.github.io/islandcodes/
+
+template:
+  bootstrap: 5
+
+reference:
+  - title: Reference data
+    contents:
+      - islands
+  - title: Classification predicates
+    contents:
+      - is_sids
+      - is_snij
+      - is_small_island
+  - title: Lookup and joining
+    contents:
+      - island_lookup
+      - add_island_cols
+      - small_islands
+
+articles:
+  - title: Get started
+    contents:
+      - islandcodes

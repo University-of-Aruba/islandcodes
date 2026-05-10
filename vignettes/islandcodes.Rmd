@@ -1,0 +1,83 @@
+---
+title: "Extending countrycode for small-island research"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Extending countrycode for small-island research}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>")
+```
+
+## The problem
+
+Researchers working on Small Island Developing States (SIDS), the Caribbean, or other sub-sovereign territories run into two recurring frictions when joining classifications onto their data.
+
+The first is sub-sovereign disambiguation. Aruba (`AW`), Curaçao (`CW`), and Sint Maarten (`SX`) have their own ISO 3166-1 codes, but Bonaire, Sint Eustatius, and Saba share `BQ`. Most country-code packages either drop these three or collapse them into one row, which silently corrupts joins.
+
+The second is classification. UN-DESA's SIDS list, including both sovereign and associate members, and the broader sub-national island jurisdiction (SNIJ) literature, are not standard fields in country-code dictionaries. Researchers tend to keep these as a side spreadsheet and hand-copy them onto each project.
+
+`islandcodes` does one thing: it ships the classification list, with disambiguating codes for the sub-sovereign cases, and a few helpers that work alongside `countrycode`.
+
+## A first pass
+
+```{r}
+library(islandcodes)
+
+is_sids(c("Aruba", "Curacao", "Bonaire", "Brazil"))
+is_snij(c("Aruba", "Curacao", "Bonaire", "Brazil"))
+```
+
+Notice that Aruba returns `TRUE` for both `is_sids` and `is_snij`. It is a UN-DESA SIDS associate member and a sub-national island jurisdiction within the Kingdom of the Netherlands. Bonaire returns `FALSE` for SIDS but `TRUE` for SNIJ: it is part of the Netherlands proper as a special municipality, not a separate jurisdiction recognised by UN-DESA.
+
+The package accepts country names, ISO 3166-1 alpha-2 codes, or the hyphenated extensions used here for the three BES islands.
+
+```{r}
+is_sids(c("AW", "CW", "BQ-BO", "AX", "BR"))
+```
+
+## Adding columns to a research data frame
+
+```{r}
+df <- data.frame(
+  country  = c("Aruba", "Curacao", "Bonaire", "Sint Maarten", "Brazil"),
+  variable = c(3.5, 3.1, 0.5, 1.2, 1900)
+)
+
+add_island_cols(df, "country")
+```
+
+By default `add_island_cols` attaches `iso_code`, `is_sids`, `is_snij`, `sids_tier`, `political_association`, `wb_region`, and `wb_income_group`. Override `cols` for a narrower selection.
+
+## Working alongside countrycode
+
+`islandcodes` imports `countrycode` for name-to-code resolution on the long tail of country names. For projects that already use `countrycode`, run it first to get an ISO column, then pass that column to `islandcodes`.
+
+```{r}
+library(countrycode)
+
+df$iso2 <- countrycode(df$country, "country.name", "iso2c")
+df$iso2  # note Bonaire collapses to NA in countrycode
+
+# islandcodes recovers the BES cases via direct hyphenated lookup
+add_island_cols(df, "country",
+                cols = c("iso_code", "is_sids", "is_snij"))
+```
+
+The pattern is: `countrycode` for the standard ISO conversion, `islandcodes` for everything that does not fit.
+
+## Filtered subsets
+
+```{r}
+nrow(small_islands(sids_only = TRUE))
+nrow(small_islands(snij_only = TRUE))
+
+head(small_islands(criteria = c(small = TRUE, island = TRUE, sovereign = TRUE)),
+     8)
+```
+
+## Source and citation
+
+The bundled dataset is mirrored from the [University of Aruba island-research-reference-data](https://github.com/University-of-Aruba/island-research-reference-data) repository, licensed CC BY 4.0. Run `citation("islandcodes")` for the canonical citation.

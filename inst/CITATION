@@ -1,0 +1,20 @@
+citHeader("To cite islandcodes in publications use both entries below: the R package, and the underlying reference dataset.")
+
+bibentry(
+  bibtype = "Manual",
+  title   = "islandcodes: Reference Data and Helpers for Small Island States and Territories",
+  author  = person("Rendell", "de Kort"),
+  year    = format(Sys.Date(), "%Y"),
+  note    = sprintf("R package version %s", meta$Version),
+  url     = "https://github.com/University-of-Aruba/islandcodes"
+)
+
+bibentry(
+  bibtype      = "Misc",
+  title        = "island-research-reference-data: Country and territory classifications for small-island research",
+  author       = person(family = "University of Aruba",
+                        given  = "Digital Competence Dutch Caribbean Network"),
+  year         = "2026",
+  howpublished = "GitHub repository, CC BY 4.0",
+  url          = "https://github.com/University-of-Aruba/island-research-reference-data"
+)
