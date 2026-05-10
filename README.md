@@ -64,6 +64,12 @@ The bundled `islands` dataset is mirrored from the [University of Aruba island-r
 
 Please cite both the package and the underlying reference dataset in academic work. Run `citation("islandcodes")` for the canonical references.
 
+## Acknowledgments
+
+With thanks to **Edward Cheung**, the Aruban-American engineer at NASA Goddard whose tradition of finding ways to name Hubble Space Telescope hardware "Aruba" (most famously the Aruba trolley used during servicing missions) is the inspiration for the `aruba()` function in this package. A small island has produced an outsized number of people who quietly insist their island be named.
+
+The `islands` reference dataset is the work of the [Digital Competence Dutch Caribbean (DCDC) Network](https://dcdc.network) at the University of Aruba.
+
 ## License
 
 CC BY 4.0. See [LICENSE.md](LICENSE.md).

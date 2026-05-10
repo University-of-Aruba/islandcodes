@@ -37,6 +37,16 @@ under CC BY 4.0. Run \code{citation("islandcodes")} for the canonical
 references.
 }
 
+\section{Acknowledgments}{
+
+With thanks to Edward Cheung, the Aruban-American engineer at NASA
+Goddard whose tradition of finding ways to put "Aruba" onto Hubble
+Space Telescope hardware (most famously the Aruba trolley used during
+servicing missions) is the inspiration for the \code{\link{aruba}}
+function in this package. A small island has produced an outsized
+number of people who quietly insist their island be named.
+}
+
 \seealso{
 Useful links:
 \itemize{

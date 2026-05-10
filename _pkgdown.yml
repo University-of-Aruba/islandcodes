@@ -17,6 +17,9 @@ reference:
       - island_lookup
       - add_island_cols
       - small_islands
+  - title: Easter egg
+    contents:
+      - aruba
 
 articles:
   - title: Get started
