@@ -1,13 +1,17 @@
-#' Aruba
+#' A.R.U.B.A.: Annotated Reference for Under-coded Border Areas
 #'
 #' A convenience wrapper around \code{\link{island_lookup}} with Aruba
 #' as the default. Calling \code{aruba()} returns Aruba's classification
 #' row; passing another country or ISO code returns that one instead.
 #'
-#' Named in homage to Edward Cheung, the Aruban-American engineer at
-#' NASA Goddard who, across multiple Hubble Space Telescope servicing
-#' missions, made a tradition of finding ways to put the name "Aruba"
-#' onto the spacecraft. This package puts it on CRAN.
+#' Named in homage to Edward Cheung, the Aruban engineer at NASA
+#' Goddard who designed A.R.U.B.A. (the ASCS/NCS Relay Unit Breaker
+#' Assembly) installed on the Hubble Space Telescope during the 2002
+#' servicing mission. Cheung engineered the backronym specifically so
+#' children in his home country would have something concrete to point
+#' to on the telescope. We borrowed the trick. His ARUBA cuts power to
+#' Hubble's instruments when there is a fault; ours returns a row of
+#' classification data. Both spell Aruba.
 #'
 #' @param x A character vector of country names or ISO codes. Defaults
 #'   to \code{"Aruba"}.
@@ -30,9 +34,11 @@ aruba <- function(x = "Aruba",
   if (!isTRUE(quiet) && interactive() &&
       length(x) == 1L && identical(tolower(x), "aruba")) {
     message(
-      "Named in homage to Edward Cheung, the Aruban engineer who put ",
-      "Aruba on the Hubble Space Telescope. Set ",
-      "options(islandcodes.aruba.quiet = TRUE) to silence."
+      "A.R.U.B.A. — Annotated Reference for Under-coded Border Areas.\n",
+      "Named in homage to Edward Cheung's A.R.U.B.A. (ASCS/NCS Relay Unit\n",
+      "Breaker Assembly), installed on the Hubble Space Telescope during\n",
+      "the 2002 servicing mission. Set options(islandcodes.aruba.quiet = TRUE)\n",
+      "to silence."
     )
   }
   island_lookup(x)

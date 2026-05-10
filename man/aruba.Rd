@@ -2,7 +2,7 @@
 % Please edit documentation in R/aruba.R
 \name{aruba}
 \alias{aruba}
-\title{Aruba}
+\title{A.R.U.B.A.: Annotated Reference for Under-coded Border Areas}
 \usage{
 aruba(x = "Aruba", quiet = getOption("islandcodes.aruba.quiet", FALSE))
 }
@@ -25,10 +25,14 @@ as the default. Calling \code{aruba()} returns Aruba's classification
 row; passing another country or ISO code returns that one instead.
 }
 \details{
-Named in homage to Edward Cheung, the Aruban-American engineer at
-NASA Goddard who, across multiple Hubble Space Telescope servicing
-missions, made a tradition of finding ways to put the name "Aruba"
-onto the spacecraft. This package puts it on CRAN.
+Named in homage to Edward Cheung, the Aruban engineer at NASA
+Goddard who designed A.R.U.B.A. (the ASCS/NCS Relay Unit Breaker
+Assembly) installed on the Hubble Space Telescope during the 2002
+servicing mission. Cheung engineered the backronym specifically so
+children in his home country would have something concrete to point
+to on the telescope. We borrowed the trick. His ARUBA cuts power to
+Hubble's instruments when there is a fault; ours returns a row of
+classification data. Both spell Aruba.
 }
 \examples{
 aruba()
