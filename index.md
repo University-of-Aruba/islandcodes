@@ -108,5 +108,4 @@ of Aruba.
 
 ## License
 
-CC BY 4.0. See
-[LICENSE.md](https://university-of-aruba.github.io/islandcodes/LICENSE.md).
+CC BY 4.0. See the LICENSE file.

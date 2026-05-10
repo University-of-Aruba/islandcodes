@@ -3,7 +3,7 @@
 ## Authors
 
 - **Rendell de Kort**. Author, maintainer.
-  [](https://orcid.org/0000-0001-9598-9698)
+  [](https://orcid.org/0009-0006-5402-0500)
 
 - **University of Aruba**. Copyright holder, funder.  
   Digital Competence Dutch Caribbean (DCDC) Network

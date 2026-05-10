@@ -65,7 +65,7 @@ Useful links:
 ## Author
 
 **Maintainer**: Rendell de Kort <rendell.dekort@ua.aw>
-([ORCID](https://orcid.org/0000-0001-9598-9698))
+([ORCID](https://orcid.org/0009-0006-5402-0500))
 
 Other contributors:
 
