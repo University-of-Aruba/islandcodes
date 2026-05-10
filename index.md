@@ -91,13 +91,16 @@ references.
 
 ## Acknowledgments
 
-With thanks to **Edward Cheung**, the Aruban-American engineer at NASA
-Goddard whose tradition of finding ways to name Hubble Space Telescope
-hardware “Aruba” (most famously the Aruba trolley used during servicing
-missions) is the inspiration for the
+With thanks to **Edward Cheung**, the Aruban engineer at NASA Goddard
+who designed **A.R.U.B.A.** — the ASCS/NCS Relay Unit Breaker Assembly —
+installed on the Hubble Space Telescope during the 2002 servicing
+mission. Cheung engineered the backronym so children in his home country
+would have something concrete to point to on the telescope. The
 [`aruba()`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md)
-function in this package. A small island has produced an outsized number
-of people who quietly insist their island be named.
+function in this package is a small homage in the same style:
+**A.R.U.B.A. — Annotated Reference for Under-coded Border Areas**. His
+version cuts power to Hubble’s instruments when there is a fault; ours
+returns a row of classification data. Both spell Aruba.
 
 The `islands` reference dataset is the work of the [Digital Competence
 Dutch Caribbean (DCDC) Network](https://dcdc.network) at the University

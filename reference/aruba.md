@@ -1,4 +1,4 @@
-# Aruba
+# A.R.U.B.A.: Annotated Reference for Under-coded Border Areas
 
 A convenience wrapper around
 [`island_lookup`](https://university-of-aruba.github.io/islandcodes/reference/island_lookup.md)
@@ -33,10 +33,14 @@ A data frame with one row per element of `x` (the same shape as
 
 ## Details
 
-Named in homage to Edward Cheung, the Aruban-American engineer at NASA
-Goddard who, across multiple Hubble Space Telescope servicing missions,
-made a tradition of finding ways to put the name "Aruba" onto the
-spacecraft. This package puts it on CRAN.
+Named in homage to Edward Cheung, the Aruban engineer at NASA Goddard
+who designed A.R.U.B.A. (the ASCS/NCS Relay Unit Breaker Assembly)
+installed on the Hubble Space Telescope during the 2002 servicing
+mission. Cheung engineered the backronym specifically so children in his
+home country would have something concrete to point to on the telescope.
+We borrowed the trick. His ARUBA cuts power to Hubble's instruments when
+there is a fault; ours returns a row of classification data. Both spell
+Aruba.
 
 ## Examples
 

@@ -1,4 +1,4 @@
-# islandcodes: Reference data and helpers for small island states and territories
+# Reference data and helpers for small island states and territories
 
 Provides a curated reference list of countries and territories with
 classifications for Small Island Developing States (SIDS), sub-national
@@ -42,13 +42,14 @@ references.
 
 ## Acknowledgments
 
-With thanks to Edward Cheung, the Aruban-American engineer at NASA
-Goddard whose tradition of finding ways to put "Aruba" onto Hubble Space
-Telescope hardware (most famously the Aruba trolley used during
-servicing missions) is the inspiration for the
+With thanks to Edward Cheung, the Aruban engineer at NASA Goddard who
+designed A.R.U.B.A. (the ASCS/NCS Relay Unit Breaker Assembly) installed
+on the Hubble Space Telescope during the 2002 servicing mission. Cheung
+engineered the backronym so children in his home country would have
+something concrete to point to on the telescope. The
 [`aruba`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md)
-function in this package. A small island has produced an outsized number
-of people who quietly insist their island be named.
+function in this package is a small homage in the same style: A.R.U.B.A.
+as Annotated Reference for Under-coded Border Areas.
 
 ## See also
 

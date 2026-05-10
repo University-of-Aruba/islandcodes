@@ -25,4 +25,4 @@
 ## Easter egg
 
 - [`aruba()`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md)
-  : Aruba
+  : A.R.U.B.A.: Annotated Reference for Under-coded Border Areas
