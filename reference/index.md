@@ -21,3 +21,8 @@
   : Add island classification columns to a data frame
 - [`small_islands()`](https://university-of-aruba.github.io/islandcodes/reference/small_islands.md)
   : Return a filtered subset of small-island states and territories
+
+## Easter egg
+
+- [`aruba()`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md)
+  : Aruba

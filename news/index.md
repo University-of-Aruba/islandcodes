@@ -20,6 +20,11 @@ Initial CRAN release.
   for tidy joining onto research data.
 - [`small_islands()`](https://university-of-aruba.github.io/islandcodes/reference/small_islands.md)
   shorthand for filtered subsets.
+- [`aruba()`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md):
+  a convenience wrapper around
+  [`island_lookup()`](https://university-of-aruba.github.io/islandcodes/reference/island_lookup.md)
+  with Aruba as the default. A small homage to Edward Cheung’s NASA
+  naming tradition.
 - Source data mirrored from
   `github.com/University-of-Aruba/island-research-reference-data` under
   CC BY 4.0.

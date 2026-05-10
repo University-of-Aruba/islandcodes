@@ -40,6 +40,16 @@ The bundled dataset is mirrored from
 under CC BY 4.0. Run `citation("islandcodes")` for the canonical
 references.
 
+## Acknowledgments
+
+With thanks to Edward Cheung, the Aruban-American engineer at NASA
+Goddard whose tradition of finding ways to put "Aruba" onto Hubble Space
+Telescope hardware (most famously the Aruba trolley used during
+servicing missions) is the inspiration for the
+[`aruba`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md)
+function in this package. A small island has produced an outsized number
+of people who quietly insist their island be named.
+
 ## See also
 
 Useful links:

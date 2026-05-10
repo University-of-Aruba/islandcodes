@@ -89,6 +89,20 @@ Please cite both the package and the underlying reference dataset in
 academic work. Run `citation("islandcodes")` for the canonical
 references.
 
+## Acknowledgments
+
+With thanks to **Edward Cheung**, the Aruban-American engineer at NASA
+Goddard whose tradition of finding ways to name Hubble Space Telescope
+hardware “Aruba” (most famously the Aruba trolley used during servicing
+missions) is the inspiration for the
+[`aruba()`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md)
+function in this package. A small island has produced an outsized number
+of people who quietly insist their island be named.
+
+The `islands` reference dataset is the work of the [Digital Competence
+Dutch Caribbean (DCDC) Network](https://dcdc.network) at the University
+of Aruba.
+
 ## License
 
 CC BY 4.0. See
@@ -117,6 +131,11 @@ CC BY 4.0. See
   : Add island classification columns to a data frame
 - [`small_islands()`](https://university-of-aruba.github.io/islandcodes/reference/small_islands.md)
   : Return a filtered subset of small-island states and territories
+
+## Easter egg
+
+- [`aruba()`](https://university-of-aruba.github.io/islandcodes/reference/aruba.md)
+  : Aruba
 
 # Articles
 
