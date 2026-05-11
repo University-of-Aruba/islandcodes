@@ -14,21 +14,24 @@ This is a new package. It bundles the [University of Aruba island-research-refer
 
 ## Test environments
 
-* local: Windows 11, R 4.2.2 — 0 errors, 0 warnings, 2 NOTEs (expected, see below)
 * GitHub Actions: macOS-latest (release), windows-latest (release), ubuntu-latest (devel, release, oldrel-1) — all green
-* win-builder R-devel — 0 errors, 0 warnings, 1 NOTE (spelling, see below)
+* win-builder R-devel (R 2026-05-10 r90034) — 0 errors, 0 warnings, 1 NOTE (see below)
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 NOTE
 
-The remaining NOTE is the spell-checker flagging the following words as possibly misspelled:
+The NOTE on win-builder has two parts:
+
+**Spell-check.** Possibly misspelled words in DESCRIPTION:
 
 * **Aaland, Bonaire, Maarten, Sint** — place names (Åland Islands, Bonaire, Sint Maarten / Sint Eustatius). Spelled in ASCII per CRAN convention; the bundled `islands` dataset uses the diacritic (Åland) where appropriate.
 * **SNIJ** — a standard term in small-island political-geography literature: Sub-National Island Jurisdiction (Baldacchino, 2010).
 * **disambiguating** — used in the standard sense (the package disambiguates the three BES islands within ISO 3166-1 alpha-2 `BQ`).
 
 All are intentional and correctly spelled.
+
+**URL check.** `https://orcid.org/0009-0006-5402-0500` was flagged as "invalid" with a 60-second timeout. The URL is the maintainer's valid ORCID identifier and resolves with `HTTP/1.1 200 OK` from independent network checks; the failure is a transient orcid.org reachability issue on the win-builder host, not a defective URL.
 
 ## Downstream dependencies
 
