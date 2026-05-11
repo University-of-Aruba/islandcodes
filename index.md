@@ -108,4 +108,4 @@ of Aruba.
 
 ## License
 
-CC BY 4.0. See the LICENSE file.
+CC BY 4.0. See <https://creativecommons.org/licenses/by/4.0/>.
