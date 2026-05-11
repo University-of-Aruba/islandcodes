@@ -1,6 +1,6 @@
 Package: islandcodes
 Title: Reference Data and Helpers for Small Island States and Territories
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Rendell", "de Kort",
            email = "rendell.dekort@ua.aw",
@@ -21,7 +21,7 @@ Description: A curated reference list of countries and territories with
     rather than replace 'countrycode'. Source data is maintained at
     <https://github.com/University-of-Aruba/island-research-reference-data>
     and licensed CC BY 4.0.
-License: CC BY 4.0 + file LICENSE
+License: CC BY 4.0
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.2.3

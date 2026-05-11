@@ -1,5 +1,13 @@
 # cran-comments.md
 
+## Resubmission
+
+This is a resubmission addressing reviewer feedback from Uwe Ligges (11 May 2026):
+
+* Removed `+ file LICENSE` from the `License` field in DESCRIPTION; the field now reads `License: CC BY 4.0`.
+* Removed the `LICENSE` file (it was the boilerplate template, not used to specify additional restrictions on CC BY 4.0).
+* Updated the README's license section to point to the canonical CC BY 4.0 URL instead of the deleted file.
+
 ## Submission notes
 
 This is a new package. It bundles the [University of Aruba island-research-reference-data](https://github.com/University-of-Aruba/island-research-reference-data) reference list (CC BY 4.0) and provides predicates and a tidy joiner for small-island and sub-sovereign classification work, intended to extend rather than replace `countrycode`.

@@ -1,3 +1,9 @@
+# islandcodes 0.1.1
+
+Resubmission addressing CRAN reviewer feedback (Uwe Ligges).
+
+* `License` field simplified to `CC BY 4.0`; the `+ file LICENSE` suffix and the accompanying boilerplate `LICENSE` file have been removed (the file was not used to specify additional restrictions on CC BY 4.0).
+
 # islandcodes 0.1.0
 
 Initial CRAN release.
