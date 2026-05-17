@@ -1,5 +1,9 @@
 # Changelog
 
+## islandcodes 0.1.1.9000 (development)
+
+- Documentation and metadata only; no user-facing API change.
+
 ## islandcodes 0.1.1
 
 CRAN release: 2026-05-15
