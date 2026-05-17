@@ -3,10 +3,11 @@ citHeader("To cite islandcodes in publications use both entries below: the R pac
 bibentry(
   bibtype = "Manual",
   title   = "islandcodes: Reference Data and Helpers for Small Island States and Territories",
-  author  = person("Rendell", "de Kort"),
-  year    = format(Sys.Date(), "%Y"),
+  author  = person("Rendell", "de Kort",
+                   comment = c(ORCID = "0009-0006-5402-0500")),
+  year    = "2026",
   note    = sprintf("R package version %s", meta$Version),
-  url     = "https://github.com/University-of-Aruba/islandcodes"
+  url     = "https://CRAN.R-project.org/package=islandcodes"
 )
 
 bibentry(

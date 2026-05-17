@@ -1,6 +1,7 @@
 # islandcodes
 
 <!-- badges: start -->
+[![CRAN status](https://www.r-pkg.org/badges/version/islandcodes)](https://CRAN.R-project.org/package=islandcodes)
 [![R-CMD-check](https://github.com/University-of-Aruba/islandcodes/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/University-of-Aruba/islandcodes/actions/workflows/R-CMD-check.yaml)
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 <!-- badges: end -->
@@ -11,7 +12,7 @@ The bundled dataset includes Aruba, Curaçao, Bonaire, Sint Eustatius, Saba, Sin
 
 ## Installation
 
-From CRAN once available:
+Install the released version from CRAN:
 
 ```r
 install.packages("islandcodes")

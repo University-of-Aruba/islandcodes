@@ -8,6 +8,7 @@
 ^README\.Rmd$
 ^cran-comments\.md$
 ^CRAN-SUBMISSION$
+^CITATION\.cff$
 ^\.git$
 ^\.gitignore$
 ^revdep$

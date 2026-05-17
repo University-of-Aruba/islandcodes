@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use islandcodes in academic work, please cite both the R package and the underlying reference dataset."
+type: software
+title: "islandcodes: Reference Data and Helpers for Small Island States and Territories"
+version: 0.1.1
+date-released: 2026-05-15
+authors:
+  - family-names: "de Kort"
+    given-names: "Rendell"
+    orcid: "https://orcid.org/0009-0006-5402-0500"
+repository-code: "https://github.com/University-of-Aruba/islandcodes"
+url: "https://CRAN.R-project.org/package=islandcodes"
+license: CC-BY-4.0
+keywords:
+  - small island developing states
+  - SIDS
+  - sub-national island jurisdictions
+  - SNIJ
+  - Caribbean
+  - country codes
+  - R package
