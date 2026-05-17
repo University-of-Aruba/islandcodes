@@ -1,3 +1,7 @@
+# islandcodes 0.1.1.9000 (development)
+
+* Documentation and metadata only; no user-facing API change.
+
 # islandcodes 0.1.1
 
 Resubmission addressing CRAN reviewer feedback (Uwe Ligges).

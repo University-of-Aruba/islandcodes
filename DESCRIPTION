@@ -1,6 +1,6 @@
 Package: islandcodes
 Title: Reference Data and Helpers for Small Island States and Territories
-Version: 0.1.1
+Version: 0.1.1.9000
 Authors@R: c(
     person("Rendell", "de Kort",
            email = "rendell.dekort@ua.aw",
