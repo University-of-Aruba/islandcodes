@@ -11,18 +11,18 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/University-of-Aruba/islandcodes/blob/main/inst/CITATION)
+[`inst/CITATION`](https://github.com/University-of-Aruba/islandcodes/blob/v0.1.1/inst/CITATION)
 
 de Kort R (2026). *islandcodes: Reference Data and Helpers for Small
-Island States and Territories*. R package version 0.1.1.9000,
-<https://CRAN.R-project.org/package=islandcodes>.
+Island States and Territories*. R package version 0.1.1,
+<https://github.com/University-of-Aruba/islandcodes>.
 
     @Manual{,
       title = {islandcodes: Reference Data and Helpers for Small Island States and Territories},
       author = {Rendell {de Kort}},
       year = {2026},
-      note = {R package version 0.1.1.9000},
-      url = {https://CRAN.R-project.org/package=islandcodes},
+      note = {R package version 0.1.1},
+      url = {https://github.com/University-of-Aruba/islandcodes},
     }
 
 University of Aruba D (2026). “island-research-reference-data: Country
