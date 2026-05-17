@@ -2,6 +2,8 @@
 
 ## islandcodes 0.1.1
 
+CRAN release: 2026-05-15
+
 Resubmission addressing CRAN reviewer feedback (Uwe Ligges).
 
 - `License` field simplified to `CC BY 4.0`; the `+ file LICENSE` suffix

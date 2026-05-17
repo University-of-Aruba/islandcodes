@@ -14,7 +14,7 @@ typically collapse or omit.
 
 ## Installation
 
-From CRAN once available:
+Install the released version from CRAN:
 
 ``` r
 
