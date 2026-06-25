@@ -15,11 +15,14 @@ source_url <- paste0(
   "countries_reference_xlsform.csv"
 )
 
+# na.strings = "" (empty only): the upstream CSV uses empty cells for missing
+# values, never the literal "NA". Critically, Namibia's ISO 3166-1 alpha-2 code
+# IS the string "NA"; treating "NA" as missing here would silently drop Namibia.
 raw <- utils::read.csv(
   source_url,
   stringsAsFactors = FALSE,
   encoding = "UTF-8",
-  na.strings = c("", "NA")
+  na.strings = ""
 )
 
 # Drop the XLSForm scaffolding column; researchers don't need it.
@@ -37,13 +40,21 @@ for (col in flag_cols) {
   raw[[col]] <- suppressWarnings(as.integer(raw[[col]]))
 }
 
-# Order columns: identity first, classifications next, criteria last.
+# Coordinate columns: keep as numeric (decimal degrees, WGS84).
+coord_cols <- c("latitude", "longitude", "capital_latitude", "capital_longitude")
+for (col in coord_cols) {
+  raw[[col]] <- suppressWarnings(as.numeric(raw[[col]]))
+}
+
+# Order columns: identity first, classifications next, criteria, then coordinates.
 col_order <- c(
   "name", "label", "iso_code",
   "wb_region", "wb_income_group", "political_association",
   "is_sids", "sids_tier", "is_snij",
   "criterion_small", "criterion_island",
-  "criterion_developing", "criterion_sovereign"
+  "criterion_developing", "criterion_sovereign",
+  "latitude", "longitude",
+  "capital", "capital_latitude", "capital_longitude"
 )
 islands <- raw[, col_order, drop = FALSE]
 
@@ -57,8 +68,10 @@ if (!dir.exists("data")) dir.create("data")
 save(islands, file = "data/islands.rda", compress = "xz")
 
 message(sprintf(
-  "Built islands.rda: %d rows, %d cols. SIDS=%d, SNIJ=%d.",
+  "Built islands.rda: %d rows, %d cols. SIDS=%d, SNIJ=%d. Coords: %d point, %d capital.",
   nrow(islands), ncol(islands),
   sum(islands$is_sids == 1, na.rm = TRUE),
-  sum(islands$is_snij == 1, na.rm = TRUE)
+  sum(islands$is_snij == 1, na.rm = TRUE),
+  sum(!is.na(islands$latitude)),
+  sum(!is.na(islands$capital_latitude))
 ))

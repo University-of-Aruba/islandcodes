@@ -78,6 +78,44 @@ head(small_islands(criteria = c(small = TRUE, island = TRUE, sovereign = TRUE)),
      8)
 ```
 
+## Coordinates
+
+Each territory carries two kinds of location, both in WGS84 decimal degrees: a representative point on the main landmass (`latitude`, `longitude`) and the capital city (`capital`, `capital_latitude`, `capital_longitude`). `island_coords()` returns them for a vector of names or codes, in input order.
+
+```{r}
+island_coords(c("Aruba", "Curacao", "Bonaire", "Sint Maarten"))
+```
+
+The two semantics differ for dispersed territories. For French Polynesia the landmass point sits near Tahiti while the capital is Papeete; for the United States the landmass point is in the continental interior, far from Washington.
+
+```{r}
+island_coords(c("PF", "US"))
+island_coords(c("PF", "US"), which = "capital")
+```
+
+A natural use is inter-island distance. With the coordinates in hand, a base-R great-circle (haversine) calculation gives the spread of the Dutch Caribbean, from the ABC islands off Venezuela to the SSS islands 900 km to the northeast.
+
+```{r}
+dutch <- island_coords(c("AW", "CW", "BQ-BO", "SX", "BQ-SA", "BQ-SE"))
+
+haversine <- function(lat1, lon1, lat2, lon2) {
+  r <- 6371; p <- pi / 180
+  a <- sin((lat2 - lat1) * p / 2)^2 +
+    cos(lat1 * p) * cos(lat2 * p) * sin((lon2 - lon1) * p / 2)^2
+  2 * r * asin(pmin(1, sqrt(a)))
+}
+
+aw <- dutch[dutch$iso_code == "AW", ]
+data.frame(
+  island = dutch$label,
+  km_from_aruba = round(
+    haversine(aw$latitude, aw$longitude, dutch$latitude, dutch$longitude)
+  )
+)
+```
+
+Because `island_coords()` keeps input order and fills unresolved rows with `NA`, it slots directly into a pipeline: resolve a column of names, attach coordinates, compute distances or hand the points to a mapping package.
+
 ## Source and citation
 
 The bundled dataset is mirrored from the [University of Aruba island-research-reference-data](https://github.com/University-of-Aruba/island-research-reference-data) repository, licensed CC BY 4.0. Run `citation("islandcodes")` for the canonical citation.

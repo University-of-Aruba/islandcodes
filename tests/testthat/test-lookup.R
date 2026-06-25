@@ -48,11 +48,16 @@ test_that("small_islands rejects unknown criteria names", {
 })
 
 test_that("islands dataset has expected shape and key rows", {
-  expect_equal(nrow(islands), 250)
-  expected <- c("name", "iso_code", "is_sids", "is_snij")
+  expect_equal(nrow(islands), 251)
+  expected <- c("name", "iso_code", "is_sids", "is_snij",
+                "latitude", "longitude", "capital",
+                "capital_latitude", "capital_longitude")
   expect_true(all(expected %in% names(islands)))
   expect_true("AW" %in% islands$iso_code)
   expect_true("BQ-BO" %in% islands$iso_code)
   expect_true("CW" %in% islands$iso_code)
   expect_true("AX" %in% islands$iso_code)
+  # Namibia's ISO code is the literal string "NA"; it must not be dropped.
+  expect_true("Namibia" %in% islands$label)
+  expect_true(any(islands$label == "Namibia" & islands$iso_code == "NA"))
 })

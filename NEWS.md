@@ -1,6 +1,8 @@
-# islandcodes 0.1.1.9000 (development)
+# islandcodes 0.2.0
 
-* Documentation and metadata only; no user-facing API change.
+* The `islands` dataset gains five coordinate columns (WGS84 decimal degrees): `latitude`/`longitude` (a representative point on each territory's main landmass) and `capital`/`capital_latitude`/`capital_longitude` (the capital city). Sourced from Natural Earth with a hand-curated supplement for the BES islands, French overseas departments, and other small territories; see the upstream `island-research-reference-data` for provenance.
+* New `island_coords()` returns coordinates for a vector of names or ISO codes, with `which = "point"` (default) or `which = "capital"`.
+* Bug fix: Namibia is no longer dropped from `islands`. Its ISO 3166-1 alpha-2 code is the literal string `"NA"`, which the data-build step previously treated as a missing value. The dataset now has 251 rows (was 250).
 
 # islandcodes 0.1.1
 

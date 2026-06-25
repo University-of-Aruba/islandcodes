@@ -6,7 +6,7 @@
 #' and others) that are typically collapsed or omitted by ISO 3166-1
 #' country-code lists.
 #'
-#' @format A data frame with 251 rows and 13 columns:
+#' @format A data frame with 251 rows and 18 columns:
 #' \describe{
 #'   \item{name}{Short common name (e.g. "Aruba", "Curacao", "Bonaire").}
 #'   \item{label}{Display label, used by the upstream XLSForm survey.}
@@ -28,6 +28,14 @@
 #'   \item{criterion_island}{1 if an island or archipelago; 0 otherwise.}
 #'   \item{criterion_developing}{1 if classified as developing; 0 otherwise.}
 #'   \item{criterion_sovereign}{1 if a sovereign state; 0 otherwise.}
+#'   \item{latitude}{Representative point on the main landmass, WGS84
+#'     decimal degrees. \code{NA} for United States Minor Outlying Islands.}
+#'   \item{longitude}{Representative point on the main landmass, WGS84
+#'     decimal degrees.}
+#'   \item{capital}{Capital city name, or \code{NA} for uninhabited /
+#'     capital-less territories.}
+#'   \item{capital_latitude}{Capital city, WGS84 decimal degrees.}
+#'   \item{capital_longitude}{Capital city, WGS84 decimal degrees.}
 #' }
 #'
 #' @source University of Aruba, Digital Competence Dutch Caribbean (DCDC)
@@ -43,4 +51,9 @@
 #' # Dutch Kingdom territories (an example of the SNIJ axis)
 #' islands[islands$political_association == "Dutch Kingdom",
 #'         c("name", "iso_code", "is_sids", "is_snij")]
+#'
+#' # Coordinates: representative landmass point and capital city
+#' islands[islands$iso_code == "AW",
+#'         c("name", "latitude", "longitude", "capital",
+#'           "capital_latitude", "capital_longitude")]
 "islands"

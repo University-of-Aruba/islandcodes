@@ -5,7 +5,7 @@
 \alias{islands}
 \title{Reference list of countries and territories with small-island classifications}
 \format{
-A data frame with 251 rows and 13 columns:
+A data frame with 251 rows and 18 columns:
 \describe{
   \item{name}{Short common name (e.g. "Aruba", "Curacao", "Bonaire").}
   \item{label}{Display label, used by the upstream XLSForm survey.}
@@ -27,6 +27,14 @@ A data frame with 251 rows and 13 columns:
   \item{criterion_island}{1 if an island or archipelago; 0 otherwise.}
   \item{criterion_developing}{1 if classified as developing; 0 otherwise.}
   \item{criterion_sovereign}{1 if a sovereign state; 0 otherwise.}
+  \item{latitude}{Representative point on the main landmass, WGS84
+    decimal degrees. \code{NA} for United States Minor Outlying Islands.}
+  \item{longitude}{Representative point on the main landmass, WGS84
+    decimal degrees.}
+  \item{capital}{Capital city name, or \code{NA} for uninhabited /
+    capital-less territories.}
+  \item{capital_latitude}{Capital city, WGS84 decimal degrees.}
+  \item{capital_longitude}{Capital city, WGS84 decimal degrees.}
 }
 }
 \source{
@@ -53,5 +61,10 @@ table(islands$wb_region[islands$is_sids == 1])
 # Dutch Kingdom territories (an example of the SNIJ axis)
 islands[islands$political_association == "Dutch Kingdom",
         c("name", "iso_code", "is_sids", "is_snij")]
+
+# Coordinates: representative landmass point and capital city
+islands[islands$iso_code == "AW",
+        c("name", "latitude", "longitude", "capital",
+          "capital_latitude", "capital_longitude")]
 }
 \keyword{datasets}

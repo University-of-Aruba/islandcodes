@@ -6,7 +6,7 @@
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC_BY_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 <!-- badges: end -->
 
-`islandcodes` is a small R package that ships a curated reference list of countries and territories with classifications for **Small Island Developing States (SIDS)**, **sub-national island jurisdictions (SNIJ)**, World Bank region and income group, and political association. It is designed to extend `countrycode` for researchers working on small islands, sub-sovereign territories, and the Caribbean.
+`islandcodes` is a small R package that ships a curated reference list of countries and territories with classifications for **Small Island Developing States (SIDS)**, **sub-national island jurisdictions (SNIJ)**, World Bank region and income group, political association, and **coordinates** (a representative landmass point and the capital city). It is designed to extend `countrycode` for researchers working on small islands, sub-sovereign territories, and the Caribbean.
 
 The bundled dataset includes Aruba, Curaçao, Bonaire, Sint Eustatius, Saba, Sint Maarten, the French overseas collectivities, Åland Islands, and other sub-sovereign cases that ISO 3166-1 country-code lists typically collapse or omit.
 
@@ -46,6 +46,10 @@ add_island_cols(df, "country")
 # Filtered subsets
 small_islands(sids_only = TRUE)
 small_islands(criteria = c(small = TRUE, island = TRUE, sovereign = FALSE))
+
+# Coordinates: representative landmass point, or capital city
+island_coords(c("Aruba", "Curacao", "Bonaire"))
+island_coords(c("AW", "PF"), which = "capital")
 ```
 
 ## Why a separate package
@@ -59,7 +63,7 @@ small_islands(criteria = c(small = TRUE, island = TRUE, sovereign = FALSE))
 
 ## Data source
 
-The bundled `islands` dataset is mirrored from the [University of Aruba island-research-reference-data](https://github.com/University-of-Aruba/island-research-reference-data) repository, maintained by the [DCDC Network](https://dcdc.network) (Digital Competence Dutch Caribbean), licensed CC BY 4.0. The build script at `data-raw/DATASET.R` pulls the canonical CSV; rebuild after any upstream change.
+The bundled `islands` dataset is mirrored from the [University of Aruba island-research-reference-data](https://github.com/University-of-Aruba/island-research-reference-data) repository, maintained by the [DCDC Network](https://dcdc.network) (Digital Competence Dutch Caribbean), licensed CC BY 4.0. The build script at `data-raw/DATASET.R` pulls the canonical CSV; rebuild after any upstream change. Coordinates are derived upstream from Natural Earth with a hand-curated supplement for the BES islands, French overseas departments, and other small territories.
 
 ## Citation
 
