@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1732 2000" width="520" height="600">
+  <defs>
+    <radialGradient id="space" cx="42%" cy="34%" r="80%">
+      <stop offset="0%" stop-color="#16324f"/>
+      <stop offset="55%" stop-color="#0b1a30"/>
+      <stop offset="100%" stop-color="#060d18"/>
+    </radialGradient>
+    <clipPath id="hexClip">
+      <path d="M 866,41.4 L 1696,520.7 L 1696,1479.3 L 866,1958.6 L 36,1479.3 L 36,520.7 Z"/>
+    </clipPath>
+    <style>
+      text{font-family:'SFMono-Regular','Consolas','Menlo','Liberation Mono','Courier New',monospace;}
+      .code{font-size:52px;}
+    </style>
+  </defs>
+
+  <path d="M 866,0 L 1732,500 L 1732,1500 L 866,2000 L 0,1500 L 0,500 Z" fill="#36577b"/>
+  <path d="M 866,41.4 L 1696,520.7 L 1696,1479.3 L 866,1958.6 L 36,1479.3 L 36,520.7 Z"
+        fill="url(#space)" stroke="#ffffff" stroke-opacity="0.16" stroke-width="2"/>
+
+  <g clip-path="url(#hexClip)">
+    <g stroke="#2b4a6a" stroke-opacity="0.18" stroke-width="2">
+      <line x1="180" y1="0" x2="180" y2="2000"/><line x1="360" y1="0" x2="360" y2="2000"/>
+      <line x1="540" y1="0" x2="540" y2="2000"/><line x1="720" y1="0" x2="720" y2="2000"/>
+      <line x1="900" y1="0" x2="900" y2="2000"/><line x1="1080" y1="0" x2="1080" y2="2000"/>
+      <line x1="1260" y1="0" x2="1260" y2="2000"/><line x1="1440" y1="0" x2="1440" y2="2000"/>
+      <line x1="1620" y1="0" x2="1620" y2="2000"/>
+      <line x1="0" y1="200" x2="1732" y2="200"/><line x1="0" y1="380" x2="1732" y2="380"/>
+      <line x1="0" y1="560" x2="1732" y2="560"/><line x1="0" y1="740" x2="1732" y2="740"/>
+      <line x1="0" y1="920" x2="1732" y2="920"/><line x1="0" y1="1100" x2="1732" y2="1100"/>
+      <line x1="0" y1="1280" x2="1732" y2="1280"/><line x1="0" y1="1460" x2="1732" y2="1460"/>
+    </g>
+    <g fill="#ffffff">
+      <circle cx="280" cy="330" r="3" opacity="0.22"/><circle cx="1280" cy="300" r="3" opacity="0.26"/>
+      <circle cx="1540" cy="1000" r="2.5" opacity="0.20"/><circle cx="900" cy="1330" r="2.5" opacity="0.18"/>
+      <circle cx="1120" cy="420" r="2" opacity="0.22"/><circle cx="680" cy="330" r="2.5" opacity="0.22"/>
+    </g>
+
+    <text x="866" y="248" text-anchor="middle" font-size="19" letter-spacing="1"
+          fill="#6d8fb3" opacity="0.40">A.R.U.B.A · ASCS/NCS RELAY UNIT BREAKER ASSEMBLY</text>
+
+    <path d="M 220,520 Q 866,185 1540,540" fill="none" stroke="#6d8fb3" stroke-opacity="0.26"
+          stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round"/>
+    <rect x="857" y="318" width="24" height="15" rx="2" fill="#cdd9e6" fill-opacity="0.8"/>
+    <line x1="838" y1="325" x2="857" y2="325" stroke="#cdd9e6" stroke-opacity="0.8" stroke-width="3"/>
+    <line x1="881" y1="325" x2="900" y2="325" stroke="#cdd9e6" stroke-opacity="0.8" stroke-width="3"/>
+
+    <!-- colour = classification: green SIDS, coral SNIJ, amber sovereign non-SIDS -->
+    <!-- row 1 -->
+    <g transform="translate(350,500) scale(0.58) rotate(25)" fill="#5cc98a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="392" y="518" fill="#5cc98a">MV</text>
+    <g transform="translate(700,500) scale(0.6) rotate(-15)" fill="#ff7a52" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="742" y="518" fill="#ff7a52">GL</text>
+    <g transform="translate(1040,500) scale(0.6) rotate(42)" fill="#5cc98a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="1082" y="518" fill="#5cc98a">FJ</text>
+    <g transform="translate(1370,500) scale(0.5) rotate(5)" fill="#f0c24a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="1412" y="518" fill="#f0c24a">MT</text>
+    <!-- row 2 -->
+    <g transform="translate(300,730) scale(0.58) rotate(35)" fill="#5cc98a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="342" y="748" fill="#5cc98a">WS</text>
+    <g transform="translate(640,730) scale(0.58,0.72) rotate(-26)" fill="#ff7a52" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="682" y="748" fill="#ff7a52">AW</text>
+    <g transform="translate(980,730) scale(0.55) rotate(-10)" fill="#f0c24a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="1022" y="748" fill="#f0c24a">CY</text>
+    <g transform="translate(1320,730) scale(0.6) rotate(10)" fill="#5cc98a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="1362" y="748" fill="#5cc98a">BB</text>
+    <!-- row 3 -->
+    <g transform="translate(330,960) scale(0.56) rotate(15)" fill="#ff7a52" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="372" y="978" fill="#ff7a52">PR</text>
+    <g transform="translate(680,960) scale(0.54) rotate(20)" fill="#5cc98a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="722" y="978" fill="#5cc98a">KI</text>
+    <g transform="translate(1010,960) scale(0.6) rotate(15)" fill="#ff7a52" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="1052" y="978" fill="#ff7a52">CW</text>
+    <g transform="translate(1360,960) scale(0.58) rotate(-20)" fill="#5cc98a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="1402" y="978" fill="#5cc98a">VU</text>
+    <!-- row 4 -->
+    <g transform="translate(480,1180) scale(0.5) rotate(0)" fill="#f0c24a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="522" y="1198" fill="#f0c24a">IS</text>
+    <g transform="translate(820,1180) scale(0.55) rotate(-12)" fill="#ff7a52" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="862" y="1198" fill="#ff7a52">SX</text>
+    <g transform="translate(1160,1180) scale(0.55) rotate(-18)" fill="#5cc98a" stroke="#ffffff" stroke-opacity="0.25" stroke-width="2"><path d="M -32,2 C -36,-12 -18,-26 2,-23 C 20,-21 33,-10 31,4 C 29,18 12,27 -6,24 C -24,21 -28,16 -32,2 Z"/></g>
+    <text class="code" x="1202" y="1198" fill="#5cc98a">CV</text>
+  </g>
+
+  <!-- wordmark -->
+  <line x1="566" y1="1648" x2="1166" y2="1648" stroke="#ffffff" stroke-opacity="0.45" stroke-width="2"/>
+  <text x="866" y="1742" text-anchor="middle" font-size="98" letter-spacing="3" fill="#f3f7fc">islandcodes</text>
+
+  <!-- colour legend -->
+  <g font-family="'SFMono-Regular','Consolas','Liberation Mono','Courier New',monospace" font-size="27" fill="#aebfce">
+    <circle cx="640" cy="1800" r="11" fill="#5cc98a"/><text x="660" y="1810">SIDS</text>
+    <circle cx="812" cy="1800" r="11" fill="#ff7a52"/><text x="832" y="1810">SNIJ</text>
+    <circle cx="985" cy="1800" r="11" fill="#f0c24a"/><text x="1005" y="1810">OTHER</text>
+  </g>
+</svg>

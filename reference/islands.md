@@ -14,7 +14,7 @@ islands
 
 ## Format
 
-A data frame with 251 rows and 13 columns:
+A data frame with 251 rows and 18 columns:
 
 - name:
 
@@ -73,6 +73,27 @@ A data frame with 251 rows and 13 columns:
 
   1 if a sovereign state; 0 otherwise.
 
+- latitude:
+
+  Representative point on the main landmass, WGS84 decimal degrees. `NA`
+  for United States Minor Outlying Islands.
+
+- longitude:
+
+  Representative point on the main landmass, WGS84 decimal degrees.
+
+- capital:
+
+  Capital city name, or `NA` for uninhabited / capital-less territories.
+
+- capital_latitude:
+
+  Capital city, WGS84 decimal degrees.
+
+- capital_longitude:
+
+  Capital city, WGS84 decimal degrees.
+
 ## Source
 
 University of Aruba, Digital Competence Dutch Caribbean (DCDC) Network.
@@ -97,13 +118,20 @@ head(islands)
 #> 4           Independent       0             <NA>       0               0
 #> 5         United States       1 Associate member       1               1
 #> 6           Independent       0             <NA>       0               1
-#>   criterion_island criterion_developing criterion_sovereign
-#> 1                0                    1                   1
-#> 2                1                    0                   0
-#> 3                0                    1                   1
-#> 4                0                    1                   1
-#> 5                1                    1                   0
-#> 6                0                    0                   1
+#>   criterion_island criterion_developing criterion_sovereign latitude longitude
+#> 1                0                    1                   1  34.1643   66.4966
+#> 2                1                    0                   0  60.1565   19.8697
+#> 3                0                    1                   1  40.6549   20.1138
+#> 4                0                    1                   1  27.3974    2.8082
+#> 5                1                    1                   0 -14.3267 -170.7472
+#> 6                0                    0                   1  42.5476    1.5394
+#>     capital capital_latitude capital_longitude
+#> 1     Kabul          34.5186           69.1813
+#> 2 Mariehamn          60.0970           19.9490
+#> 3    Tirana          41.3275           19.8189
+#> 4   Algiers          36.7650            3.0486
+#> 5 Pago Pago         -14.2766         -170.7066
+#> 6   Andorra          42.5108            1.5266
 
 # SIDS by World Bank region
 table(islands$wb_region[islands$is_sids == 1])
@@ -122,8 +150,15 @@ islands[islands$political_association == "Dutch Kingdom",
 #> 13     AW       AW       1       1
 #> 28  BQ_BO    BQ-BO       0       1
 #> 58     CW       CW       1       1
-#> 156    NL       NL       0       0
-#> 185 BQ_SA    BQ-SA       0       1
-#> 202 BQ_SE    BQ-SE       0       1
-#> 203    SX       SX       1       1
+#> 157    NL       NL       0       0
+#> 186 BQ_SA    BQ-SA       0       1
+#> 203 BQ_SE    BQ-SE       0       1
+#> 204    SX       SX       1       1
+
+# Coordinates: representative landmass point and capital city
+islands[islands$iso_code == "AW",
+        c("name", "latitude", "longitude", "capital",
+          "capital_latitude", "capital_longitude")]
+#>    name latitude longitude    capital capital_latitude capital_longitude
+#> 13   AW  12.5174  -69.9728 Oranjestad          12.5215          -70.0255
 ```

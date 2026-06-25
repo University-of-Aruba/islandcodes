@@ -40,10 +40,14 @@ island_lookup(c("Aruba", "Bonaire", "Brazil"))
 #> 1         Dutch Kingdom       1 Associate member       1               1
 #> 2         Dutch Kingdom       0             <NA>       1               1
 #> 3           Independent       0             <NA>       0               0
-#>   criterion_island criterion_developing criterion_sovereign
-#> 1                1                    0                   0
-#> 2                1                    0                   0
-#> 3                0                    1                   1
+#>   criterion_island criterion_developing criterion_sovereign latitude longitude
+#> 1                1                    0                   0  12.5174  -69.9728
+#> 2                1                    0                   0  12.1830  -68.2500
+#> 3                0                    1                   1 -12.0987  -49.5594
+#>      capital capital_latitude capital_longitude
+#> 1 Oranjestad          12.5215          -70.0255
+#> 2 Kralendijk          12.1442          -68.2655
+#> 3   Brasília         -15.7814          -47.9180
 island_lookup(c("AW", "BQ-BO"), fields = c("name", "is_sids", "is_snij"))
 #>    name is_sids is_snij
 #> 1    AW       1       1

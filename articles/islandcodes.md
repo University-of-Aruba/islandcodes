@@ -151,7 +151,90 @@ head(small_islands(criteria = c(small = TRUE, island = TRUE, sovereign = TRUE)),
 #> 6               1                1                    1                   1
 #> 7               1                1                    0                   1
 #> 8               1                1                    1                   1
+#>   latitude longitude             capital capital_latitude capital_longitude
+#> 1  17.3522  -61.7906        Saint John's          17.1180          -61.8500
+#> 2  26.4018  -77.1467              Nassau          25.0834          -77.3500
+#> 3  13.1637  -59.5690          Bridgetown          13.1020          -59.6165
+#> 4   4.4483  114.5519 Bandar Seri Begawan           4.8833          114.9333
+#> 5  15.0748  -23.6394               Praia          14.9167          -23.5167
+#> 6 -11.7277   43.3181              Moroni         -11.7042           43.2402
+#> 7  34.9133   33.0842             Nicosia          35.1667           33.3666
+#> 8  15.4588  -61.3450              Roseau          15.3010          -61.3870
 ```
+
+## Coordinates
+
+Each territory carries two kinds of location, both in WGS84 decimal
+degrees: a representative point on the main landmass (`latitude`,
+`longitude`) and the capital city (`capital`, `capital_latitude`,
+`capital_longitude`).
+[`island_coords()`](https://university-of-aruba.github.io/islandcodes/reference/island_coords.md)
+returns them for a vector of names or codes, in input order.
+
+``` r
+
+island_coords(c("Aruba", "Curacao", "Bonaire", "Sint Maarten"))
+#>          label iso_code latitude longitude
+#> 1        Aruba       AW  12.5174  -69.9728
+#> 2      Curaçao       CW  12.1450  -68.9206
+#> 3      Bonaire    BQ-BO  12.1830  -68.2500
+#> 4 Sint Maarten       SX  18.0409  -63.0701
+```
+
+The two semantics differ for dispersed territories. For French Polynesia
+the landmass point sits near Tahiti while the capital is Papeete; for
+the United States the landmass point is in the continental interior, far
+from Washington.
+
+``` r
+
+island_coords(c("PF", "US"))
+#>              label iso_code latitude longitude
+#> 1 French Polynesia       PF -17.6281 -149.4616
+#> 2    United States       US  39.5385  -97.4826
+island_coords(c("PF", "US"), which = "capital")
+#>              label iso_code          capital latitude longitude
+#> 1 French Polynesia       PF          Papeete -17.5334 -149.5667
+#> 2    United States       US Washington, D.C.  38.9015  -77.0114
+```
+
+A natural use is inter-island distance. With the coordinates in hand, a
+base-R great-circle (haversine) calculation gives the spread of the
+Dutch Caribbean, from the ABC islands off Venezuela to the SSS islands
+900 km to the northeast.
+
+``` r
+
+dutch <- island_coords(c("AW", "CW", "BQ-BO", "SX", "BQ-SA", "BQ-SE"))
+
+haversine <- function(lat1, lon1, lat2, lon2) {
+  r <- 6371; p <- pi / 180
+  a <- sin((lat2 - lat1) * p / 2)^2 +
+    cos(lat1 * p) * cos(lat2 * p) * sin((lon2 - lon1) * p / 2)^2
+  2 * r * asin(pmin(1, sqrt(a)))
+}
+
+aw <- dutch[dutch$iso_code == "AW", ]
+data.frame(
+  island = dutch$label,
+  km_from_aruba = round(
+    haversine(aw$latitude, aw$longitude, dutch$latitude, dutch$longitude)
+  )
+)
+#>           island km_from_aruba
+#> 1          Aruba             0
+#> 2        Curaçao           122
+#> 3        Bonaire           191
+#> 4   Sint Maarten           962
+#> 5           Saba           920
+#> 6 Sint Eustatius           933
+```
+
+Because
+[`island_coords()`](https://university-of-aruba.github.io/islandcodes/reference/island_coords.md)
+keeps input order and fills unresolved rows with `NA`, it slots directly
+into a pipeline: resolve a column of names, attach coordinates, compute
+distances or hand the points to a mapping package.
 
 ## Source and citation
 

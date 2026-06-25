@@ -50,15 +50,19 @@ aruba()
 #> 1   AW Aruba       AW Latin America & Caribbean     High income
 #>   political_association is_sids        sids_tier is_snij criterion_small
 #> 1         Dutch Kingdom       1 Associate member       1               1
-#>   criterion_island criterion_developing criterion_sovereign
-#> 1                1                    0                   0
+#>   criterion_island criterion_developing criterion_sovereign latitude longitude
+#> 1                1                    0                   0  12.5174  -69.9728
+#>      capital capital_latitude capital_longitude
+#> 1 Oranjestad          12.5215          -70.0255
 aruba("Curacao")
 #>   name   label iso_code                 wb_region wb_income_group
 #> 1   CW Curaçao       CW Latin America & Caribbean     High income
 #>   political_association is_sids        sids_tier is_snij criterion_small
 #> 1         Dutch Kingdom       1 Associate member       1               1
-#>   criterion_island criterion_developing criterion_sovereign
-#> 1                1                    0                   0
+#>   criterion_island criterion_developing criterion_sovereign latitude longitude
+#> 1                1                    0                   0   12.145  -68.9206
+#>      capital capital_latitude capital_longitude
+#> 1 Willemstad          12.1123          -68.8724
 aruba(c("AW", "BQ-BO", "CW"))
 #>    name   label iso_code                 wb_region wb_income_group
 #> 1    AW   Aruba       AW Latin America & Caribbean     High income
@@ -68,8 +72,12 @@ aruba(c("AW", "BQ-BO", "CW"))
 #> 1         Dutch Kingdom       1 Associate member       1               1
 #> 2         Dutch Kingdom       0             <NA>       1               1
 #> 3         Dutch Kingdom       1 Associate member       1               1
-#>   criterion_island criterion_developing criterion_sovereign
-#> 1                1                    0                   0
-#> 2                1                    0                   0
-#> 3                1                    0                   0
+#>   criterion_island criterion_developing criterion_sovereign latitude longitude
+#> 1                1                    0                   0  12.5174  -69.9728
+#> 2                1                    0                   0  12.1830  -68.2500
+#> 3                1                    0                   0  12.1450  -68.9206
+#>      capital capital_latitude capital_longitude
+#> 1 Oranjestad          12.5215          -70.0255
+#> 2 Kralendijk          12.1442          -68.2655
+#> 3 Willemstad          12.1123          -68.8724
 ```
