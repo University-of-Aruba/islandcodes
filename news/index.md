@@ -13,6 +13,12 @@
   [`island_coords()`](https://university-of-aruba.github.io/islandcodes/reference/island_coords.md)
   returns coordinates for a vector of names or ISO codes, with
   `which = "point"` (default) or `which = "capital"`.
+- New
+  [`island_distance()`](https://university-of-aruba.github.io/islandcodes/reference/island_distance.md)
+  gives great-circle (haversine) distances between islands: a full
+  symmetric matrix among one set, or element-wise/recycled distances
+  between two. Supports `which` (point or capital) and `unit` (km, mi,
+  nmi). Base R, no new dependencies.
 - Bug fix: Namibia is no longer dropped from `islands`. Its ISO 3166-1
   alpha-2 code is the literal string `"NA"`, which the data-build step
   previously treated as a missing value. The dataset now has 251 rows

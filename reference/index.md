@@ -26,6 +26,8 @@
 
 - [`island_coords()`](https://university-of-aruba.github.io/islandcodes/reference/island_coords.md)
   : Get coordinates for islands and territories
+- [`island_distance()`](https://university-of-aruba.github.io/islandcodes/reference/island_distance.md)
+  : Great-circle distance between islands
 
 ## Easter egg
 

@@ -198,43 +198,62 @@ island_coords(c("PF", "US"), which = "capital")
 #> 2    United States       US Washington, D.C.  38.9015  -77.0114
 ```
 
-A natural use is inter-island distance. With the coordinates in hand, a
-base-R great-circle (haversine) calculation gives the spread of the
-Dutch Caribbean, from the ABC islands off Venezuela to the SSS islands
-900 km to the northeast.
+## Distance and isolation
+
+[`island_distance()`](https://university-of-aruba.github.io/islandcodes/reference/island_distance.md)
+turns the coordinates into great-circle (haversine) distances. Given a
+single set it returns a symmetric matrix, which exposes the spread of
+the Dutch Caribbean, from the ABC islands off Venezuela to the SSS
+islands some 900 km to the northeast.
 
 ``` r
 
-dutch <- island_coords(c("AW", "CW", "BQ-BO", "SX", "BQ-SA", "BQ-SE"))
-
-haversine <- function(lat1, lon1, lat2, lon2) {
-  r <- 6371; p <- pi / 180
-  a <- sin((lat2 - lat1) * p / 2)^2 +
-    cos(lat1 * p) * cos(lat2 * p) * sin((lon2 - lon1) * p / 2)^2
-  2 * r * asin(pmin(1, sqrt(a)))
-}
-
-aw <- dutch[dutch$iso_code == "AW", ]
-data.frame(
-  island = dutch$label,
-  km_from_aruba = round(
-    haversine(aw$latitude, aw$longitude, dutch$latitude, dutch$longitude)
-  )
-)
-#>           island km_from_aruba
-#> 1          Aruba             0
-#> 2        Curaçao           122
-#> 3        Bonaire           191
-#> 4   Sint Maarten           962
-#> 5           Saba           920
-#> 6 Sint Eustatius           933
+round(island_distance(c("AW", "CW", "BQ-BO", "SX", "BQ-SA", "BQ-SE")))
+#>        AW  CW BQ-BO  SX BQ-SA BQ-SE
+#> AW      0 122   191 962   920   933
+#> CW    122   0    73 908   863   873
+#> BQ-BO 191  73     0 856   811   818
+#> SX    962 908   856   0    49    62
+#> BQ-SA 920 863   811  49     0    32
+#> BQ-SE 933 873   818  62    32     0
 ```
 
-Because
-[`island_coords()`](https://university-of-aruba.github.io/islandcodes/reference/island_coords.md)
-keeps input order and fills unresolved rows with `NA`, it slots directly
-into a pipeline: resolve a column of names, attach coordinates, compute
-distances or hand the points to a mapping package.
+Pass a second argument for distances from one or more origins to a set
+of destinations. The shorter side is recycled, so a single origin
+against many destinations gives the distance to each.
+
+``` r
+
+island_distance("Aruba", c("Curacao", "Bonaire", "Sint Maarten"))
+#>       CW    BQ-BO       SX 
+#> 121.5695 190.7913 961.7026
+```
+
+`which = "capital"` measures between capital cities instead of landmass
+points, and `unit` switches between kilometres, statute miles, and
+nautical miles.
+
+``` r
+
+island_distance("AW", "CW", which = "capital", unit = "nmi")
+#>       CW 
+#> 71.96274
+```
+
+Because both helpers keep input order and fill unresolved rows with
+`NA`, they slot directly into a pipeline: resolve a column of names,
+attach coordinates or distances, then rank by isolation or hand the
+points to a mapping package. A quick isolation measure is each island’s
+nearest neighbour, the smallest off-diagonal distance in its row.
+
+``` r
+
+abc <- island_distance(c("AW", "CW", "BQ-BO"))
+diag(abc) <- NA
+apply(abc, 1, min, na.rm = TRUE)  # km to nearest of the other two
+#>        AW        CW     BQ-BO 
+#> 121.56948  73.01551  73.01551
+```
 
 ## Source and citation
 

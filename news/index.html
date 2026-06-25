@@ -37,6 +37,7 @@
 <h2 class="pkg-version" data-toc-text="0.2.0" id="islandcodes-020">islandcodes 0.2.0<a class="anchor" aria-label="anchor" href="#islandcodes-020"></a></h2>
 <ul><li>The <code>islands</code> dataset gains five coordinate columns (WGS84 decimal degrees): <code>latitude</code>/<code>longitude</code> (a representative point on each territory’s main landmass) and <code>capital</code>/<code>capital_latitude</code>/<code>capital_longitude</code> (the capital city). Sourced from Natural Earth with a hand-curated supplement for the BES islands, French overseas departments, and other small territories; see the upstream <code>island-research-reference-data</code> for provenance.</li>
 <li>New <code><a href="../reference/island_coords.html">island_coords()</a></code> returns coordinates for a vector of names or ISO codes, with <code>which = "point"</code> (default) or <code>which = "capital"</code>.</li>
+<li>New <code><a href="../reference/island_distance.html">island_distance()</a></code> gives great-circle (haversine) distances between islands: a full symmetric matrix among one set, or element-wise/recycled distances between two. Supports <code>which</code> (point or capital) and <code>unit</code> (km, mi, nmi). Base R, no new dependencies.</li>
 <li>Bug fix: Namibia is no longer dropped from <code>islands</code>. Its ISO 3166-1 alpha-2 code is the literal string <code>"NA"</code>, which the data-build step previously treated as a missing value. The dataset now has 251 rows (was 250).</li>
 </ul></div>
     <div class="section level2">

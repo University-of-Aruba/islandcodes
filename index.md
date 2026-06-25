@@ -56,6 +56,10 @@ small_islands(criteria = c(small = TRUE, island = TRUE, sovereign = FALSE))
 # Coordinates: representative landmass point, or capital city
 island_coords(c("Aruba", "Curacao", "Bonaire"))
 island_coords(c("AW", "PF"), which = "capital")
+
+# Great-circle distance between islands (matrix, or origin-to-many)
+island_distance(c("AW", "CW", "BQ-BO", "SX"))
+island_distance("Aruba", c("Curacao", "Bonaire", "Sint Maarten"))
 ```
 
 ## Why a separate package

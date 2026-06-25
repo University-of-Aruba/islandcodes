@@ -242,38 +242,50 @@ interior, far from Washington.</p>
 <span><span class="co">#&gt;              label iso_code          capital latitude longitude</span></span>
 <span><span class="co">#&gt; 1 French Polynesia       PF          Papeete -17.5334 -149.5667</span></span>
 <span><span class="co">#&gt; 2    United States       US Washington, D.C.  38.9015  -77.0114</span></span></code></pre></div>
-<p>A natural use is inter-island distance. With the coordinates in hand,
-a base-R great-circle (haversine) calculation gives the spread of the
-Dutch Caribbean, from the ABC islands off Venezuela to the SSS islands
-900 km to the northeast.</p>
+</div>
+<div class="section level2">
+<h2 id="distance-and-isolation">Distance and isolation<a class="anchor" aria-label="anchor" href="#distance-and-isolation"></a>
+</h2>
+<p><code><a href="../reference/island_distance.html">island_distance()</a></code> turns the coordinates into
+great-circle (haversine) distances. Given a single set it returns a
+symmetric matrix, which exposes the spread of the Dutch Caribbean, from
+the ABC islands off Venezuela to the SSS islands some 900 km to the
+northeast.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">dutch</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/island_coords.html">island_coords</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AW"</span>, <span class="st">"CW"</span>, <span class="st">"BQ-BO"</span>, <span class="st">"SX"</span>, <span class="st">"BQ-SA"</span>, <span class="st">"BQ-SE"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">haversine</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lat1</span>, <span class="va">lon1</span>, <span class="va">lat2</span>, <span class="va">lon2</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">6371</span>; <span class="va">p</span> <span class="op">&lt;-</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">180</span></span>
-<span>  <span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="op">(</span><span class="va">lat2</span> <span class="op">-</span> <span class="va">lat1</span><span class="op">)</span> <span class="op">*</span> <span class="va">p</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">+</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">lat1</span> <span class="op">*</span> <span class="va">p</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">lat2</span> <span class="op">*</span> <span class="va">p</span><span class="op">)</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="op">(</span><span class="va">lon2</span> <span class="op">-</span> <span class="va">lon1</span><span class="op">)</span> <span class="op">*</span> <span class="va">p</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
-<span>  <span class="fl">2</span> <span class="op">*</span> <span class="va">r</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">asin</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">pmin</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">aw</span> <span class="op">&lt;-</span> <span class="va">dutch</span><span class="op">[</span><span class="va">dutch</span><span class="op">$</span><span class="va">iso_code</span> <span class="op">==</span> <span class="st">"AW"</span>, <span class="op">]</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
-<span>  island <span class="op">=</span> <span class="va">dutch</span><span class="op">$</span><span class="va">label</span>,</span>
-<span>  km_from_aruba <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span></span>
-<span>    <span class="fu">haversine</span><span class="op">(</span><span class="va">aw</span><span class="op">$</span><span class="va">latitude</span>, <span class="va">aw</span><span class="op">$</span><span class="va">longitude</span>, <span class="va">dutch</span><span class="op">$</span><span class="va">latitude</span>, <span class="va">dutch</span><span class="op">$</span><span class="va">longitude</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt;           island km_from_aruba</span></span>
-<span><span class="co">#&gt; 1          Aruba             0</span></span>
-<span><span class="co">#&gt; 2        Curaçao           122</span></span>
-<span><span class="co">#&gt; 3        Bonaire           191</span></span>
-<span><span class="co">#&gt; 4   Sint Maarten           962</span></span>
-<span><span class="co">#&gt; 5           Saba           920</span></span>
-<span><span class="co">#&gt; 6 Sint Eustatius           933</span></span></code></pre></div>
-<p>Because <code><a href="../reference/island_coords.html">island_coords()</a></code> keeps input order and fills
-unresolved rows with <code>NA</code>, it slots directly into a pipeline:
-resolve a column of names, attach coordinates, compute distances or hand
-the points to a mapping package.</p>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="../reference/island_distance.html">island_distance</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AW"</span>, <span class="st">"CW"</span>, <span class="st">"BQ-BO"</span>, <span class="st">"SX"</span>, <span class="st">"BQ-SA"</span>, <span class="st">"BQ-SE"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;        AW  CW BQ-BO  SX BQ-SA BQ-SE</span></span>
+<span><span class="co">#&gt; AW      0 122   191 962   920   933</span></span>
+<span><span class="co">#&gt; CW    122   0    73 908   863   873</span></span>
+<span><span class="co">#&gt; BQ-BO 191  73     0 856   811   818</span></span>
+<span><span class="co">#&gt; SX    962 908   856   0    49    62</span></span>
+<span><span class="co">#&gt; BQ-SA 920 863   811  49     0    32</span></span>
+<span><span class="co">#&gt; BQ-SE 933 873   818  62    32     0</span></span></code></pre></div>
+<p>Pass a second argument for distances from one or more origins to a
+set of destinations. The shorter side is recycled, so a single origin
+against many destinations gives the distance to each.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/island_distance.html">island_distance</a></span><span class="op">(</span><span class="st">"Aruba"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Curacao"</span>, <span class="st">"Bonaire"</span>, <span class="st">"Sint Maarten"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       CW    BQ-BO       SX </span></span>
+<span><span class="co">#&gt; 121.5695 190.7913 961.7026</span></span></code></pre></div>
+<p><code>which = "capital"</code> measures between capital cities
+instead of landmass points, and <code>unit</code> switches between
+kilometres, statute miles, and nautical miles.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/island_distance.html">island_distance</a></span><span class="op">(</span><span class="st">"AW"</span>, <span class="st">"CW"</span>, which <span class="op">=</span> <span class="st">"capital"</span>, unit <span class="op">=</span> <span class="st">"nmi"</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       CW </span></span>
+<span><span class="co">#&gt; 71.96274</span></span></code></pre></div>
+<p>Because both helpers keep input order and fill unresolved rows with
+<code>NA</code>, they slot directly into a pipeline: resolve a column of
+names, attach coordinates or distances, then rank by isolation or hand
+the points to a mapping package. A quick isolation measure is each
+island’s nearest neighbour, the smallest off-diagonal distance in its
+row.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">abc</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/island_distance.html">island_distance</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AW"</span>, <span class="st">"CW"</span>, <span class="st">"BQ-BO"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">abc</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="cn">NA</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">abc</span>, <span class="fl">1</span>, <span class="va">min</span>, na.rm <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>  <span class="co"># km to nearest of the other two</span></span>
+<span><span class="co">#&gt;        AW        CW     BQ-BO </span></span>
+<span><span class="co">#&gt; 121.56948  73.01551  73.01551</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="source-and-citation">Source and citation<a class="anchor" aria-label="anchor" href="#source-and-citation"></a>
