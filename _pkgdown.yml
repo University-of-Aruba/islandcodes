@@ -20,6 +20,7 @@ reference:
   - title: Coordinates
     contents:
       - island_coords
+      - island_distance
   - title: Easter egg
     contents:
       - aruba

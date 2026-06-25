@@ -93,28 +93,33 @@ island_coords(c("PF", "US"))
 island_coords(c("PF", "US"), which = "capital")
 ```
 
-A natural use is inter-island distance. With the coordinates in hand, a base-R great-circle (haversine) calculation gives the spread of the Dutch Caribbean, from the ABC islands off Venezuela to the SSS islands 900 km to the northeast.
+## Distance and isolation
+
+`island_distance()` turns the coordinates into great-circle (haversine) distances. Given a single set it returns a symmetric matrix, which exposes the spread of the Dutch Caribbean, from the ABC islands off Venezuela to the SSS islands some 900 km to the northeast.
 
 ```{r}
-dutch <- island_coords(c("AW", "CW", "BQ-BO", "SX", "BQ-SA", "BQ-SE"))
-
-haversine <- function(lat1, lon1, lat2, lon2) {
-  r <- 6371; p <- pi / 180
-  a <- sin((lat2 - lat1) * p / 2)^2 +
-    cos(lat1 * p) * cos(lat2 * p) * sin((lon2 - lon1) * p / 2)^2
-  2 * r * asin(pmin(1, sqrt(a)))
-}
-
-aw <- dutch[dutch$iso_code == "AW", ]
-data.frame(
-  island = dutch$label,
-  km_from_aruba = round(
-    haversine(aw$latitude, aw$longitude, dutch$latitude, dutch$longitude)
-  )
-)
+round(island_distance(c("AW", "CW", "BQ-BO", "SX", "BQ-SA", "BQ-SE")))
 ```
 
-Because `island_coords()` keeps input order and fills unresolved rows with `NA`, it slots directly into a pipeline: resolve a column of names, attach coordinates, compute distances or hand the points to a mapping package.
+Pass a second argument for distances from one or more origins to a set of destinations. The shorter side is recycled, so a single origin against many destinations gives the distance to each.
+
+```{r}
+island_distance("Aruba", c("Curacao", "Bonaire", "Sint Maarten"))
+```
+
+`which = "capital"` measures between capital cities instead of landmass points, and `unit` switches between kilometres, statute miles, and nautical miles.
+
+```{r}
+island_distance("AW", "CW", which = "capital", unit = "nmi")
+```
+
+Because both helpers keep input order and fill unresolved rows with `NA`, they slot directly into a pipeline: resolve a column of names, attach coordinates or distances, then rank by isolation or hand the points to a mapping package. A quick isolation measure is each island's nearest neighbour, the smallest off-diagonal distance in its row.
+
+```{r}
+abc <- island_distance(c("AW", "CW", "BQ-BO"))
+diag(abc) <- NA
+apply(abc, 1, min, na.rm = TRUE)  # km to nearest of the other two
+```
 
 ## Source and citation
 
