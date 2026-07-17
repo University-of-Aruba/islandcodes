@@ -1,3 +1,10 @@
+# islandcodes 0.2.0.9000 (development version)
+
+* New vignette "Profiling the world's small island developing states": a worked
+  analysis using only the bundled data, covering SIDS tiers, the World Bank
+  cross-tabs, a measured isolation ranking (distance to nearest SIDS peer), and
+  the Dutch Kingdom as a stress test of the sub-sovereign coding scheme.
+
 # islandcodes 0.2.0
 
 * The `islands` dataset gains five coordinate columns (WGS84 decimal degrees): `latitude`/`longitude` (a representative point on each territory's main landmass) and `capital`/`capital_latitude`/`capital_longitude` (the capital city). Sourced from Natural Earth with a hand-curated supplement for the BES islands, French overseas departments, and other small territories; see the upstream `island-research-reference-data` for provenance.

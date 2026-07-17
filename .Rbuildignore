@@ -13,3 +13,4 @@
 ^\.gitignore$
 ^revdep$
 ^codecov\.yml$
+^paper$

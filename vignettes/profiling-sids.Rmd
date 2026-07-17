@@ -1,0 +1,139 @@
+---
+title: "Profiling the world's small island developing states"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Profiling the world's small island developing states}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE, comment = "#>", fig.width = 7, fig.height = 4.5
+)
+```
+
+The intro vignette shows the mechanics. This one works a small analysis end to
+end, using nothing but the bundled `islands` data and the package helpers, to
+show the kind of reproducible profile `islandcodes` is meant to make a one-line
+job rather than a spreadsheet exercise.
+
+```{r}
+library(islandcodes)
+
+sids <- islands[islands$is_sids == 1, ]
+nrow(sids)
+```
+
+## Who counts, and under what tier
+
+The UN-DESA list mixes fully sovereign states with non-sovereign associate
+members. That distinction is analytically load-bearing: an associate member sits
+inside a metropolitan constitutional order and inherits a fiscal backstop that a
+sovereign micro-state does not. The `sids_tier` column keeps the two apart.
+
+```{r}
+table(sids$sids_tier, useNA = "ifany")
+```
+
+Overlaying the sub-national island jurisdiction axis shows that the two
+classifications are related but not identical. Every SIDS associate member is a
+SNIJ, but many SNIJs (Bonaire, the French departments) are not SIDS, because
+they are constitutionally integrated into the metropole rather than recognised
+as distinct jurisdictions.
+
+```{r}
+table(SIDS_tier = sids$sids_tier, SNIJ = sids$is_snij == 1, useNA = "ifany")
+```
+
+## How the group distributes across the World Bank taxonomy
+
+Joining the SIDS list onto World Bank region and income group, which is the step
+that usually means hand-copying from a PDF, is here just a cross-tab on columns
+that already travel with the data.
+
+```{r}
+table(sids$wb_region)
+
+table(sids$wb_income_group)
+```
+
+The income spread is the point most casual treatments of "SIDS" miss: the group
+runs from high-income territories to lower-middle-income states, so any analysis
+that treats SIDS as a single development stratum is averaging across a real gap.
+
+## Isolation, measured rather than asserted
+
+"Remote" is asserted about small islands far more often than it is measured.
+With coordinates and a distance helper it becomes a computed quantity. For each
+SIDS with a known landmass point, take the great-circle distance to its nearest
+other SIDS.
+
+```{r}
+sids_geo <- sids[!is.na(sids$latitude), ]
+codes    <- sids_geo$iso_code
+
+D <- island_distance(codes)          # symmetric matrix of km
+diag(D) <- NA                        # ignore self-distance
+sids_geo$nearest_sids_km <- round(apply(D, 1, min, na.rm = TRUE))
+```
+
+The ranking is a reminder that "distance to the nearest SIDS" measures
+clustering, not absolute remoteness. The top of the list mixes oceans: Bahrain
+in the Gulf and Singapore in Southeast Asia are not remote in any everyday
+sense, yet their nearest fellow SIDS is thousands of kilometres away, and they
+sit alongside genuinely oceanic cases such as São Tomé and Príncipe and
+Kiribati that are isolated for the opposite reason.
+
+```{r}
+ord <- order(sids_geo$nearest_sids_km, decreasing = TRUE)
+head(sids_geo[ord, c("label", "wb_region", "nearest_sids_km")], 10)
+```
+
+At the other end sit the tightly packed Lesser Antilles, where the nearest peer
+is a short hop away: Anguilla and Sint Maarten are 23 km apart.
+
+```{r}
+head(sids_geo[order(sids_geo$nearest_sids_km),
+              c("label", "wb_region", "nearest_sids_km")], 10)
+```
+
+A base-R map makes the two regimes visible at once: the whole reference set in
+grey, SIDS overplotted, sized by isolation.
+
+```{r}
+plot(islands$longitude, islands$latitude,
+     pch = 16, cex = 0.4, col = "grey80",
+     xlab = "Longitude", ylab = "Latitude",
+     main = "Small island developing states, sized by isolation")
+points(sids_geo$longitude, sids_geo$latitude,
+       pch = 21, bg = "#f38439", col = "white",
+       cex = 0.6 + 2.4 * (sids_geo$nearest_sids_km / max(sids_geo$nearest_sids_km)))
+```
+
+## The Dutch Caribbean as a stress test of the coding scheme
+
+The Kingdom of the Netherlands is a compact illustration of why the
+disambiguation matters. It comprises seven entities: the European metropole and
+six Caribbean territories, which the dataset returns in one filter. They span
+both classifications, and the Caribbean six are split geographically into the
+ABC islands off Venezuela and the SSS islands some 900 km to the northeast.
+
+```{r}
+dc <- islands[islands$political_association == "Dutch Kingdom",
+              c("label", "iso_code", "sids_tier", "is_snij")]
+dc
+
+# ABC-to-SSS separation, from Aruba
+island_distance("AW", c("Sint Maarten", "Saba", "Sint Eustatius"))
+```
+
+The Netherlands row earns its place by contrast: it is the only one that is not
+a sub-national island jurisdiction and carries no SIDS tier. The three
+constituent countries (Aruba, Curaçao, Sint Maarten) are associate-member SIDS,
+while Bonaire, Sint Eustatius, and Saba are special municipalities of the
+Netherlands proper, so they read as SNIJ but not SIDS. A country-code package
+that collapses those three into a single `BQ` row cannot produce this table at
+all: half the Caribbean territories would vanish or merge. That is the class of
+silent error the package exists to remove, and the reason the analysis above is
+reproducible from a single bundled dataset rather than a chain of manual joins.
