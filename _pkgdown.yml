@@ -21,6 +21,7 @@ reference:
     contents:
       - island_coords
       - island_distance
+      - island_market_access
   - title: Easter egg
     contents:
       - aruba
@@ -29,3 +30,6 @@ articles:
   - title: Get started
     contents:
       - islandcodes
+  - title: Worked analysis
+    contents:
+      - profiling-sids

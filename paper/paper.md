@@ -34,9 +34,11 @@ landmass and the capital city. On top of the data it provides a small, stable
 set of helpers: predicate functions (`is_sids()`, `is_snij()`,
 `is_small_island()`), a tidy joiner (`island_lookup()`, `add_island_cols()`), a
 filtered-subset shorthand (`small_islands()`), and geographic helpers
-(`island_coords()`, `island_distance()` for great-circle distances). The package
-imports rather than replaces `countrycode` [@countrycode], coercing country
-names to ISO codes before lookup so it composes with existing workflows.
+(`island_coords()`, `island_distance()` for great-circle distances, and
+`island_market_access()` for distance-decayed access to a user-supplied mass
+vector). The package imports rather than replaces `countrycode` [@countrycode],
+coercing country names to ISO codes before lookup so it composes with existing
+workflows.
 
 Its distinguishing feature is the treatment of sub-sovereign territories that
 ISO 3166-1 collapses or omits. Aruba (`AW`), Curaçao (`CW`), and Sint Maarten
@@ -53,27 +55,43 @@ Researchers working on small islands and sub-sovereign territories repeatedly
 hit two gaps that are individually minor and collectively corrosive to
 reproducibility.
 
-The first is identity. General-purpose country-code tools resolve sovereign
-states reliably but handle non-independent jurisdictions inconsistently. Because
-Bonaire, Sint Eustatius, and Saba share the ISO code `BQ`, any analysis that
-needs them as separate observations, which is to say any analysis of the Dutch
-Caribbean, has to patch the reference data by hand. Hand-patching is precisely
-the undocumented, one-off editing step that silently breaks a pipeline when the
-data are refreshed or the code is rerun by someone else.
+The first is identity, and it is narrow but consequential. Measured against
+`countrycode` [@countrycode], the most widely used R tool for this task,
+`islandcodes` resolves 248 of its 251 territory labels identically; the
+disagreement is three rows. Those three are Bonaire, Sint Eustatius, and Saba,
+which share the single ISO 3166-1 code `BQ`. Supplied individually as country
+names they resolve to `NA`; only the combined string "Bonaire, Sint Eustatius
+and Saba" resolves, and it resolves to one code for three jurisdictions. Three
+rows out of 251 is a small number in general and the entire special-municipality
+layer of the Dutch Caribbean in particular, so any analysis that needs those
+territories as separate observations has to patch the reference data by hand.
+Hand-patching is precisely the undocumented, one-off editing step that silently
+breaks a pipeline when the data are refreshed or the code is rerun by someone
+else. `islandcodes` splits them into `BQ-BO`, `BQ-SE`, and `BQ-SA` and joins on
+them consistently.
 
-The second is classification. The two schemes that define this field, the
-UN-DESA list of Small Island Developing States [@undesa_sids] and the academic
-concept of the sub-national island jurisdiction [@baldacchino2006], are not
-carried by any code-conversion package. Joining either onto a research dataset
-typically means copying lists out of PDFs and reconciling country strings by
-eye, an error-prone step that leaves no audit trail.
+The second gap is classification, and it is not narrow at all. The `countrycode`
+codelist carries 627 columns of country attributes; none of them encodes SIDS
+status, SIDS tier, or sub-national island jurisdiction status. The two schemes
+that define this field, the UN-DESA list of Small Island Developing States
+[@undesa_sids] and the academic concept of the sub-national island jurisdiction
+[@baldacchino2006], are carried by no code-conversion package we are aware of.
+In `islandcodes` 85 of the 251 territories carry at least one of the two
+classifications (58 SIDS, 47 SNIJ, 20 both), and 47 of those 85 are
+non-sovereign, which is to say they belong to exactly the category that
+general-purpose country tools handle least well. Joining either scheme onto a
+research dataset currently means copying lists out of PDFs and reconciling
+country strings by eye, an error-prone step that leaves no audit trail.
 
-A concrete illustration of why curated, tested reference data matters: standard
-ingestion routines frequently drop Namibia, whose ISO 3166-1 alpha-2 code is the
-literal string `"NA"`, because the build step reads it as a missing value. This
-exact bug was present in an earlier version of the bundled dataset and is fixed
-and regression-tested in the current release; the dataset now carries 251 rows
-rather than 250. The class of error, not the single case, is the point.
+A concrete illustration of why curated, tested reference data matters: Namibia's
+ISO 3166-1 alpha-2 code is the literal string `"NA"`. Code-conversion tools
+return it correctly, but the string survives `is.na()` and is then converted to a
+true missing value by the default `na.strings` behaviour of ordinary CSV
+ingestion, at which point the country silently disappears. This exact bug was
+present in an earlier version of the bundled dataset and is fixed and
+regression-tested in the current release; the dataset now carries 251 rows rather
+than 250. The class of error, a reference list that is correct at the source and
+wrong by the time it reaches the analysis, is the point.
 
 `islandcodes` closes both gaps by packaging the classification list as
 version-controlled, openly licensed (CC BY 4.0) data with a documented
@@ -106,8 +124,26 @@ The exported surface is small by design:
 - **Geography.** `island_coords()` returns representative-point or capital-city
   coordinates; `island_distance()` returns great-circle (haversine) distances,
   either a symmetric matrix among one set of islands or element-wise distances
-  between two, in kilometres, miles, or nautical miles, implemented in base R
-  with no additional dependencies.
+  between two, in kilometres, miles, or nautical miles.
+- **Access.** `island_market_access()` computes
+  $MA_i = \sum_{j 
+eq i} m_j d_{ij}^{-	heta}$, the reduced-form market-access
+  measure standard in economic geography [@redding2004; @donaldson2016] and
+  increasingly used in the satellite-based literature on rural connectivity in
+  data-scarce settings [@voncarnap2026]. Origins and destinations may differ, the
+  decay elasticity is a parameter rather than a default, and own mass is excluded
+  unless the caller supplies an explicit internal distance. Mass is always
+  user-supplied: population and output are time-varying and contested, so the
+  package ships the geometry and leaves the numbers and their reference year to
+  the analyst. This keeps the bundled data a stable reference list rather than a
+  panel that silently ages.
+
+Both geographic helpers are implemented in base R with no additional
+dependencies. The vignette states explicitly what a single representative point
+per territory can and cannot support: great-circle distance is not travel
+distance and not travel cost, a centroid is a convention rather than a location
+for a dispersed archipelago, and territories without coordinates propagate as
+`NA` rather than being dropped.
 
 The package targets R (>= 4.1.0), imports only `countrycode`, and is documented
 with a vignette, a `pkgdown` site, and a `testthat` suite.

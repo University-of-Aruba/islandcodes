@@ -111,6 +111,158 @@ points(sids_geo$longitude, sids_geo$latitude,
        cex = 0.6 + 2.4 * (sids_geo$nearest_sids_km / max(sids_geo$nearest_sids_km)))
 ```
 
+## From nearest neighbour to access
+
+Distance to the nearest peer is a blunt instrument. It throws away every
+observation but one, so an island with a single close neighbour and nothing
+else within an ocean scores identically to one sitting inside a dense
+archipelago. The economic geography literature, and the recent remote-sensing
+work on rural connectivity that borrows from it, uses a decayed sum over all
+destinations instead: access is mass discounted by distance, summed.
+
+`island_market_access()` implements that. The package deliberately does not
+ship the mass. Population and output are time-varying and contested, so the
+figures and their reference year stay the analyst's responsibility. With unit
+mass the function reduces to a pure peer-accessibility index, which needs no
+external data and isolates what the functional form alone contributes.
+
+```{r}
+sids_geo$access <- island_market_access(
+  codes,
+  mass  = rep(1, length(codes)),   # unit mass: proximity to peers, nothing else
+  theta = 1
+)
+```
+
+The ranking is Caribbean from top to bottom. All twenty highest-access SIDS sit
+in the Lesser and Greater Antilles, which is the densest concentration of
+island jurisdictions anywhere on the planet.
+
+```{r}
+ord_a <- order(sids_geo$access, decreasing = TRUE)
+head(sids_geo[ord_a, c("label", "wb_region", "nearest_sids_km", "access")], 10)
+
+table(sids_geo$wb_region[ord_a][1:20])
+```
+
+Set against the nearest-neighbour column it is close to a mirror image, and the
+Spearman correlation says so. That is worth stating plainly rather than dressing
+up: at this level the two measures mostly agree, and access does not overturn
+the isolation ranking.
+
+```{r}
+cor(sids_geo$nearest_sids_km, sids_geo$access, method = "spearman")
+```
+
+What access buys is not a different answer but a better-behaved one.
+Nearest-neighbour distance is a single-observation statistic: it is determined
+entirely by one peer, so it jumps discontinuously when that peer is added to or
+dropped from the reference set, and it cannot distinguish Sint Maarten, which
+has one neighbour at 23 km and thirty more within 1,000 km, from a pair of
+islands alone in an ocean. Access uses every destination and moves smoothly.
+
+The decay elasticity is a modelling choice, not a fact, so it needs a
+sensitivity check rather than a silent default. Here the ordering turns out to
+be robust: rank correlation between `theta = 0.5` and `theta = 2` is above 0.97,
+and only six of the fifty-eight territories move more than five places.
+
+```{r}
+r <- sapply(c(0.5, 1, 2), function(th) {
+  rank(-island_market_access(codes, rep(1, length(codes)), theta = th))
+})
+colnames(r) <- c("theta_0.5", "theta_1", "theta_2")
+cor(r[, "theta_0.5"], r[, "theta_2"], method = "spearman")
+```
+
+The movement that does happen is concentrated in one place, and it is
+substantive rather than numerical noise. Guam and the Northern Mariana Islands
+climb fifteen and sixteen places as `theta` rises, because they are a tight pair
+inside an otherwise empty stretch of the western Pacific. That is exactly what a
+decay parameter encodes: how much a close cluster compensates for global
+remoteness. An analyst who reports one ranking under one unstated `theta` has
+hidden that judgement rather than made it.
+
+```{r}
+moved <- data.frame(label = sids_geo$label, r,
+                    move = abs(r[, "theta_0.5"] - r[, "theta_2"]))
+head(moved[order(moved$move, decreasing = TRUE), ], 6)
+```
+
+With real mass the measure changes character, because access stops being about
+how many neighbours there are and becomes about who they are. Here the Dutch
+Caribbean six, using illustrative population in thousands: substitute sourced
+figures and cite the year in real work.
+
+```{r}
+pop <- c(AW = 108, CW = 156, SX = 43, "BQ-BO" = 25, "BQ-SE" = 3, "BQ-SA" = 2)
+sort(round(island_market_access(names(pop), pop), 3), decreasing = TRUE)
+```
+
+Bonaire tops the within-Kingdom ranking because it sits between the two
+population centres of the ABC group, and Sint Maarten comes last despite being
+the busiest of the SSS islands, because its only near neighbours are the two
+smallest territories in the set. The spread is a factor of seven from top to
+bottom.
+
+Widen the destination set to the surrounding mainland economies and that
+internal structure almost disappears. The six collapse into two flat tiers, ABC
+and SSS, about twenty per cent apart, and within each tier the differences are
+negligible.
+
+```{r}
+region <- c(US = 335000, CO = 52000, VE = 28000, DO = 11000, PR = 3200)
+sort(round(island_market_access(names(pop), region, to = names(region)), 2),
+     decreasing = TRUE)
+```
+
+The two tables answer different questions. Relative position inside the Kingdom
+is governed by which islands you are next to; access to the world outside it is
+governed only by which side of the Caribbean you sit on, and the intra-group
+distances that dominate the first table are too small to matter in the second.
+
+## What these distances are, and what they are not
+
+Every number above rests on one great-circle distance between two points, and
+that construction has limits worth stating before anyone builds on it.
+
+The coordinates are a single representative point per territory. For a compact
+island that is unambiguous. For a dispersed archipelago it is not: French
+Polynesia spans some 2,000 km of ocean, and a representative point for it is a
+convention, not a location. Where the distinction matters, `which = "capital"`
+gives the alternative anchor, and the two can differ by hundreds of kilometres.
+
+```{r}
+island_coords("French Polynesia")
+island_coords("French Polynesia", which = "capital")
+```
+
+Great-circle distance is not travel distance and is emphatically not travel
+cost. Between two islands there is no road; there is a ferry schedule, an air
+route with a hub in between, and a container rotation, each with its own
+geometry. Aruba to Sint Maarten is about 900 km as the crow flies and a
+connection through a third country in practice. The same caution applies to the
+market-access numbers: they are a geographic accessibility measure, and calling
+them market access in the economic sense requires the reader to accept distance
+as a stand-in for cost. Where actual travel times or freight rates exist, join
+them onto these codes and use those instead. That is what the package is for.
+
+Nor does a single point capture internal geography. Two territories of equal
+area and equal distance from everything else can differ sharply in how their
+own population is distributed relative to a port, which is exactly the variation
+the satellite-based literature on rural market access is built to measure and
+which a centroid cannot see.
+
+Finally, a handful of territories carry no coordinate at all and propagate as
+`NA` rather than being silently dropped: the representative point is missing for
+the United States Minor Outlying Islands, and capitals are missing for the
+uninhabited and capital-less entries. Checking for those is a step, not an
+afterthought.
+
+```{r}
+sum(is.na(islands$latitude))
+sum(is.na(islands$capital_latitude))
+```
+
 ## The Dutch Caribbean as a stress test of the coding scheme
 
 The Kingdom of the Netherlands is a compact illustration of why the
