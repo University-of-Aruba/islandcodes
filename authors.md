@@ -14,14 +14,14 @@ Source:
 [`inst/CITATION`](https://github.com/University-of-Aruba/islandcodes/blob/main/inst/CITATION)
 
 de Kort R (2026). *islandcodes: Reference Data and Helpers for Small
-Island States and Territories*. R package version 0.2.0,
+Island States and Territories*. R package version 0.2.0.9000,
 <https://CRAN.R-project.org/package=islandcodes>.
 
     @Manual{,
       title = {islandcodes: Reference Data and Helpers for Small Island States and Territories},
       author = {Rendell {de Kort}},
       year = {2026},
-      note = {R package version 0.2.0},
+      note = {R package version 0.2.0.9000},
       url = {https://CRAN.R-project.org/package=islandcodes},
     }
 

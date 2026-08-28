@@ -28,6 +28,8 @@
   : Get coordinates for islands and territories
 - [`island_distance()`](https://university-of-aruba.github.io/islandcodes/reference/island_distance.md)
   : Great-circle distance between islands
+- [`island_market_access()`](https://university-of-aruba.github.io/islandcodes/reference/island_market_access.md)
+  : Distance-decayed market access
 
 ## Easter egg
 

@@ -28,7 +28,7 @@ Inputs are resolved in three passes: direct match against the `iso_code`
 column of
 [`islands`](https://university-of-aruba.github.io/islandcodes/reference/islands.md),
 then a case-insensitive match against `name`, then a fallback through
-[`countrycode`](https://vincentarelbundock.github.io/countrycode/man/countrycode.html)
+[`countrycode`](https://rdrr.io/pkg/countrycode/man/countrycode.html)
 from `"country.name"` to `"iso2c"`. Unresolved entries return `NA`.
 
 Hyphenated codes (`"BQ-BO"` for Bonaire, `"BQ-SE"` for Sint Eustatius,

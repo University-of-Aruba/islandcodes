@@ -1,9 +1,10 @@
 pandoc: 3.8.3
-pkgdown: 2.2.0
+pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
   islandcodes: islandcodes.html
-last_built: 2026-06-25T13:22Z
+  profiling-sids: profiling-sids.html
+last_built: 2026-08-28T20:55Z
 urls:
   reference: https://university-of-aruba.github.io/islandcodes/reference
   article: https://university-of-aruba.github.io/islandcodes/articles

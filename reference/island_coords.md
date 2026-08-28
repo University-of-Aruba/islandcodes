@@ -36,7 +36,7 @@ Inputs are resolved the same way as the predicate helpers (see
 [`is_sids`](https://university-of-aruba.github.io/islandcodes/reference/classify.md)):
 by `iso_code`, then `label`, then the XLSForm `name` slug, then a
 fallback through
-[`countrycode`](https://vincentarelbundock.github.io/countrycode/man/countrycode.html).
+[`countrycode`](https://rdrr.io/pkg/countrycode/man/countrycode.html).
 
 Coordinates are WGS84 decimal degrees. A handful of territories carry no
 coordinate and return `NA`: the representative point is missing only for

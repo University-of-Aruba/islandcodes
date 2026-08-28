@@ -1,6 +1,30 @@
 # Changelog
 
+## islandcodes 0.2.0.9000 (development version)
+
+- New
+  [`island_market_access()`](https://university-of-aruba.github.io/islandcodes/reference/island_market_access.md):
+  distance-decayed market access, `MA_i = sum_j m_j * d_ij^-theta`, the
+  reduced-form measure used in economic geography and in the
+  remote-sensing literature on rural connectivity. Mass is always
+  user-supplied, because population and output are time-varying and the
+  reference year is the analyst’s to document; the package supplies only
+  the geometry. Supports separate origins and destinations via `to`, an
+  explicit own-mass term via `self`, and any positive decay elasticity.
+  Base R, no new dependencies.
+- The SIDS-profiling vignette gains a market-access section and an
+  explicit statement of what the great-circle distances do and do not
+  represent for archipelagos (centroids in open water, no sea or air
+  route structure, no travel time).
+- New vignette “Profiling the world’s small island developing states”: a
+  worked analysis using only the bundled data, covering SIDS tiers, the
+  World Bank cross-tabs, a measured isolation ranking (distance to
+  nearest SIDS peer), and the Dutch Kingdom as a stress test of the
+  sub-sovereign coding scheme.
+
 ## islandcodes 0.2.0
+
+CRAN release: 2026-07-06
 
 - The `islands` dataset gains five coordinate columns (WGS84 decimal
   degrees): `latitude`/`longitude` (a representative point on each
